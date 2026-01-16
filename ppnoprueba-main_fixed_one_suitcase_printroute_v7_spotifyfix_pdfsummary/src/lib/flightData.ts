@@ -64,8 +64,8 @@ export const ASSETS = {
   parallaxVideo: 'https://res.cloudinary.com/dswpi1pb9/video/upload/v1768444325/Necesito_un_parallax_202601142330_dw7vw_zgukvg.mp4',
   flightAudio: 'https://res.cloudinary.com/dswpi1pb9/video/upload/v1768449461/Aeroplane_qjim7e.mp3',
   voucher: 'https://res.cloudinary.com/dswpi1pb9/image/upload/v1768569545/IMG_5971_zcyp5p.jpg',
-  spotifyEmbed: 'https://open.spotify.com/embed/playlist/3T4IrOEIvAppKIHchwZDBO?utm_source=generator',
-  spotifyLink: 'https://open.spotify.com/playlist/3T4IrOEIvAppKIHchwZDBO',
+  spotifyEmbed: 'https://open.spotify.com/embed/playlist/1EA3xdW7yJhRKR2FK0Uqwh?utm_source=generator',
+  spotifyLink: 'https://open.spotify.com/playlist/1EA3xdW7yJhRKR2FK0Uqwh',
   qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=GAB-23|23A|G23|ALC'
 } as const;
 
