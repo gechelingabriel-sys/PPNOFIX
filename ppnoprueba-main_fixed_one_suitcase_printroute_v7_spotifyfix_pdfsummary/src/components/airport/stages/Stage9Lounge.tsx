@@ -123,8 +123,8 @@ export function Stage9Lounge({ onNext, playSFX }: Stage9Props) {
                       title="Spotify Playlist"
                       src={ASSETS.spotifyEmbed}
                       width="100%"
-                      height="152"
-                      frameBorder="0"
+                      height="352"
+                      style={{ borderRadius: 12 }}                      frameBorder="0"
                       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                       loading="lazy"
                     />
