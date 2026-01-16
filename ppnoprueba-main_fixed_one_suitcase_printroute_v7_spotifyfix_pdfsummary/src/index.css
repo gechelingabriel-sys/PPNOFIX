@@ -244,13 +244,15 @@
   /* Suitcase */
   .suitcase {
     @apply relative;
-    filter: drop-shadow(0 12px 24px rgba(0,0,0,0.2));
+    /* Use box-shadow on the body to avoid occasional mobile rendering artifacts from CSS filter */
+    transform: translateZ(0);
   }
 
   .suitcase-body {
     @apply relative rounded-xl overflow-hidden;
     background: linear-gradient(180deg, #3f3f46 0%, #27272a 100%);
     border: 3px solid #52525b;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.18);
   }
 
   .suitcase-handle {
@@ -582,8 +584,20 @@
   }
 
   body {
+    background: #ffffff !important;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
+  }
+
+  /* Hide everything by default */
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* Then show ONLY the print block */
+  .print-only,
+  .print-only * {
+    visibility: visible !important;
   }
 
   .no-print {
@@ -592,5 +606,7 @@
 
   .print-only {
     display: block !important;
+    position: fixed;
+    inset: 0;
   }
 }
