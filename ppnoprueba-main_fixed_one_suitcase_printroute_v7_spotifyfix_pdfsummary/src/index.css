@@ -1,0 +1,596 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    /* Premium Airport Palette */
+    --background: 40 20% 97%;
+    --foreground: 220 15% 15%;
+
+    --card: 40 15% 99%;
+    --card-foreground: 220 15% 15%;
+
+    --popover: 40 15% 99%;
+    --popover-foreground: 220 15% 15%;
+
+    --primary: 220 12% 20%;
+    --primary-foreground: 40 20% 97%;
+
+    --secondary: 40 10% 92%;
+    --secondary-foreground: 220 12% 20%;
+
+    --muted: 40 10% 94%;
+    --muted-foreground: 220 8% 45%;
+
+    --accent: 42 85% 55%;
+    --accent-foreground: 220 15% 12%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 40 20% 97%;
+
+    --alert: 0 72% 51%;
+    --alert-foreground: 40 20% 97%;
+
+    --gold: 42 85% 55%;
+    --gold-dark: 42 75% 40%;
+
+    --border: 40 15% 88%;
+    --input: 40 15% 88%;
+    --ring: 42 85% 55%;
+
+    --radius: 0.75rem;
+
+    /* Airport specific */
+    --terminal-bg: 40 15% 96%;
+    --terminal-surface: 40 20% 99%;
+    --terminal-border: 40 10% 85%;
+    --led-green: 142 76% 45%;
+    --led-red: 0 72% 51%;
+    --led-amber: 38 92% 50%;
+    
+    /* Shadows */
+    --shadow-soft: 0 2px 8px -2px hsl(220 15% 15% / 0.08);
+    --shadow-medium: 0 4px 16px -4px hsl(220 15% 15% / 0.12);
+    --shadow-strong: 0 8px 32px -8px hsl(220 15% 15% / 0.18);
+    --shadow-glow-gold: 0 0 24px -4px hsl(42 85% 55% / 0.4);
+  }
+
+  .dark {
+    --background: 220 15% 8%;
+    --foreground: 40 20% 97%;
+    --card: 220 15% 12%;
+    --card-foreground: 40 20% 97%;
+    --popover: 220 15% 12%;
+    --popover-foreground: 40 20% 97%;
+    --primary: 40 20% 97%;
+    --primary-foreground: 220 15% 8%;
+    --secondary: 220 12% 18%;
+    --secondary-foreground: 40 20% 97%;
+    --muted: 220 12% 18%;
+    --muted-foreground: 40 10% 65%;
+    --accent: 42 85% 55%;
+    --accent-foreground: 220 15% 8%;
+    --border: 220 12% 20%;
+    --input: 220 12% 20%;
+    --ring: 42 85% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    min-height: 100svh;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Premium Button Variants */
+  .btn-airport {
+    @apply inline-flex items-center justify-center px-8 py-4 text-lg font-semibold tracking-wide uppercase transition-all duration-300;
+    @apply bg-primary text-primary-foreground rounded-lg;
+    @apply hover:scale-[1.02] active:scale-[0.98];
+    box-shadow: var(--shadow-medium);
+    min-height: 56px;
+    min-width: 200px;
+  }
+
+  .btn-airport:hover {
+    box-shadow: var(--shadow-strong);
+  }
+
+  .btn-gold {
+    @apply btn-airport;
+    background: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-dark)) 100%);
+    @apply text-foreground;
+    box-shadow: var(--shadow-glow-gold);
+  }
+
+  .btn-gold:hover {
+    box-shadow: 0 0 32px -4px hsl(42 85% 55% / 0.6);
+  }
+
+  /* Terminal Card */
+  .terminal-card {
+    @apply rounded-2xl p-6 md:p-8;
+    background: hsl(var(--terminal-surface));
+    border: 1px solid hsl(var(--terminal-border));
+    box-shadow: var(--shadow-medium);
+  }
+
+  /* Flip Board Character */
+  .flip-char {
+    @apply inline-flex items-center justify-center;
+    @apply bg-foreground text-background font-mono text-2xl md:text-4xl font-bold;
+    @apply rounded-sm;
+    width: 2ch;
+    height: 1.5em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.3);
+  }
+
+  /* LED Display */
+  .led-display {
+    @apply font-mono tracking-wider;
+    font-family: 'JetBrains Mono', monospace;
+    text-shadow: 0 0 8px currentColor;
+  }
+
+  /* Luggage Tag */
+  .luggage-tag {
+    @apply relative px-4 py-2 rounded-r-lg;
+    background: hsl(var(--card));
+    border-left: 4px solid hsl(var(--accent));
+    box-shadow: var(--shadow-soft);
+  }
+
+  .luggage-tag::before {
+    content: '';
+    @apply absolute left-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full;
+    background: hsl(var(--accent));
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+  }
+
+  /* Progress Bar */
+  .progress-airport {
+    @apply h-1 rounded-full overflow-hidden;
+    background: hsl(var(--muted));
+  }
+
+  .progress-airport-fill {
+    @apply h-full rounded-full transition-all duration-500;
+    background: linear-gradient(90deg, hsl(var(--gold)) 0%, hsl(var(--gold-dark)) 100%);
+  }
+
+  /* Stamp */
+  .stamp {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg;
+    @apply font-bold uppercase tracking-widest text-sm;
+    @apply border-4 rotate-[-5deg];
+    transform-origin: center;
+  }
+
+  .stamp-approved {
+    @apply stamp;
+    @apply border-green-600 text-green-600;
+  }
+
+  .stamp-denied {
+    @apply stamp;
+    @apply border-red-600 text-red-600;
+  }
+
+  /* Dial */
+  .dial-container {
+    @apply relative flex flex-col items-center;
+  }
+
+  .dial {
+    @apply w-16 h-20 flex items-center justify-center;
+    @apply bg-gradient-to-b from-zinc-300 to-zinc-400 rounded-lg;
+    @apply font-mono text-3xl font-bold text-foreground;
+    @apply cursor-pointer select-none;
+    box-shadow: 
+      inset 0 2px 4px rgba(255,255,255,0.5),
+      inset 0 -2px 4px rgba(0,0,0,0.2),
+      0 4px 8px rgba(0,0,0,0.3);
+    border: 2px solid hsl(var(--border));
+  }
+
+  .dial:active {
+    transform: scale(0.98);
+  }
+
+  /* Padlock */
+  .padlock-body {
+    @apply relative w-32 h-28 rounded-lg;
+    background: linear-gradient(180deg, #d4d4d8 0%, #a1a1aa 50%, #71717a 100%);
+    box-shadow: 
+      inset 0 2px 4px rgba(255,255,255,0.4),
+      0 8px 16px rgba(0,0,0,0.25);
+    border: 2px solid #52525b;
+  }
+
+  .padlock-shackle {
+    @apply absolute -top-10 left-1/2 -translate-x-1/2;
+    @apply w-16 h-12 rounded-t-full;
+    border: 6px solid #71717a;
+    border-bottom: none;
+    background: transparent;
+    box-shadow: 
+      inset 0 2px 4px rgba(255,255,255,0.3),
+      0 -2px 8px rgba(0,0,0,0.2);
+  }
+
+  .padlock-shackle.open {
+    transform: translateX(-50%) rotate(-25deg);
+    transform-origin: bottom left;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Suitcase */
+  .suitcase {
+    @apply relative;
+    filter: drop-shadow(0 12px 24px rgba(0,0,0,0.2));
+  }
+
+  .suitcase-body {
+    @apply relative rounded-xl overflow-hidden;
+    background: linear-gradient(180deg, #3f3f46 0%, #27272a 100%);
+    border: 3px solid #52525b;
+  }
+
+  .suitcase-handle {
+    @apply absolute -top-6 left-1/2 -translate-x-1/2;
+    @apply w-16 h-8 rounded-t-xl;
+    background: linear-gradient(180deg, #52525b 0%, #3f3f46 100%);
+    border: 2px solid #71717a;
+    border-bottom: none;
+  }
+
+  .suitcase-wheel {
+    @apply absolute -bottom-3 w-6 h-6 rounded-full;
+    background: linear-gradient(180deg, #27272a 0%, #18181b 100%);
+    border: 2px solid #3f3f46;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  }
+
+  /* Conveyor Belt */
+  .conveyor-belt {
+    @apply relative h-8 rounded-full overflow-hidden;
+    background: linear-gradient(180deg, #27272a 0%, #18181b 50%, #27272a 100%);
+    box-shadow: 
+      inset 0 2px 8px rgba(0,0,0,0.5),
+      0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  .conveyor-belt::after {
+    content: '';
+    @apply absolute inset-0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,0.05) 20px,
+      rgba(255,255,255,0.05) 40px
+    );
+    animation: conveyorMove 2s linear infinite;
+  }
+
+  /* Vitrine */
+  .vitrine {
+    @apply relative rounded-2xl p-1;
+    background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+    box-shadow: 
+      0 0 0 1px rgba(0,0,0,0.05),
+      0 8px 32px rgba(0,0,0,0.1),
+      inset 0 1px 0 rgba(255,255,255,1);
+    backdrop-filter: blur(8px);
+  }
+
+  .vitrine-inner {
+    @apply rounded-xl overflow-hidden;
+    background: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+  }
+
+  /* Thermal Ticket */
+  .thermal-ticket {
+    @apply relative p-6 font-mono text-sm;
+    background: #fafaf9;
+    border: 1px dashed #d4d4d4;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .thermal-ticket::before,
+  .thermal-ticket::after {
+    content: '';
+    @apply absolute left-0 right-0 h-3;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 4px,
+      #e5e5e5 4px,
+      #e5e5e5 8px
+    );
+  }
+
+  .thermal-ticket::before {
+    @apply -top-3;
+  }
+
+  .thermal-ticket::after {
+    @apply -bottom-3;
+  }
+}
+
+@layer utilities {
+  /* Animations */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes doorSlideLeft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+
+  @keyframes doorSlideRight {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+  }
+
+  @keyframes flipDown {
+    0% { transform: rotateX(0deg); }
+    50% { transform: rotateX(-90deg); }
+    100% { transform: rotateX(0deg); }
+  }
+
+  @keyframes conveyorMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(80px); }
+  }
+
+  @keyframes conveyorGlow {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes dutyfreeShimmer {
+    0% { transform: translateX(-45%) skewX(-12deg); opacity: 0.35; }
+    50% { transform: translateX(25%) skewX(-12deg); opacity: 0.8; }
+    100% { transform: translateX(105%) skewX(-12deg); opacity: 0.35; }
+  }
+
+  @keyframes planeFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+  }
+
+  @keyframes stampPress {
+    0% { transform: scale(2) rotate(-5deg); opacity: 0; }
+    50% { transform: scale(1.1) rotate(-5deg); opacity: 1; }
+    100% { transform: scale(1) rotate(-5deg); opacity: 1; }
+  }
+
+  @keyframes ticketPrint {
+    from { 
+      clip-path: inset(100% 0 0 0);
+      opacity: 0;
+    }
+    to { 
+      clip-path: inset(0 0 0 0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 hsl(var(--gold) / 0.4); }
+    50% { box-shadow: 0 0 20px 4px hsl(var(--gold) / 0.6); }
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-slide-out {
+    animation: slideOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-door-left {
+    animation: doorSlideLeft 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-door-right {
+    animation: doorSlideRight 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-flip {
+    animation: flipDown 0.3s ease-in-out;
+  }
+
+  .animate-plane-float {
+    animation: planeFloat 3s ease-in-out infinite;
+  }
+
+  .animate-stamp {
+    animation: stampPress 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .animate-ticket-print {
+    animation: ticketPrint 1.5s ease-out forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  .animate-shake {
+    animation: shake 0.3s ease-in-out;
+  }
+
+  /* Duty Free premium signage */
+  .dutyfree-sign {
+    @apply relative w-full max-w-md rounded-2xl overflow-hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.76) 100%);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.9);
+    border: 1px solid rgba(0,0,0,0.07);
+    backdrop-filter: blur(10px);
+  }
+
+  .dutyfree-sign__shine {
+    @apply absolute inset-0;
+    background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.65) 35%, transparent 70%);
+    transform: translateX(-35%);
+    animation: dutyfreeShimmer 3.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .dutyfree-sign__content {
+    @apply relative px-6 py-4;
+  }
+
+  .dutyfree-sign__row {
+    @apply flex items-center gap-4;
+  }
+
+  .dutyfree-sign__strip {
+    @apply mt-4 flex items-center justify-between gap-3;
+    @apply text-[10px] font-mono tracking-widest text-zinc-500;
+    @apply bg-zinc-950/5 rounded-xl px-4 py-2;
+    border: 1px dashed rgba(0,0,0,0.08);
+  }
+
+  .dutyfree-bag {
+    @apply relative w-14 h-14 rounded-xl;
+    background: linear-gradient(135deg, rgba(255,220,120,0.55) 0%, rgba(255,180,60,0.55) 100%);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  }
+
+  .dutyfree-bag__handle {
+    @apply absolute -top-3 left-1/2 -translate-x-1/2 w-10 h-6 rounded-t-full;
+    border: 3px solid rgba(0,0,0,0.25);
+    border-bottom: none;
+    background: transparent;
+  }
+
+  .dutyfree-bag__logo {
+    @apply absolute inset-0 flex items-center justify-center font-black tracking-widest;
+    color: rgba(0,0,0,0.6);
+  }
+
+  /* Departures-board look (for the lounge Spotify simulation) */
+  .departures-board {
+    @apply relative rounded-2xl overflow-hidden;
+    background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06), transparent 55%),
+      linear-gradient(180deg, #0b0f18 0%, #070a10 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 18px 48px rgba(0,0,0,0.35);
+  }
+
+  .departures-board__header {
+    @apply flex items-center justify-between px-5 py-4;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .departures-board__title {
+    @apply font-mono text-xs tracking-[0.35em] text-amber-200/90;
+  }
+
+  .departures-board__sub {
+    @apply font-mono text-[10px] tracking-widest text-zinc-400;
+  }
+
+  .departures-row {
+    @apply grid grid-cols-12 gap-2 px-5 py-3;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .departures-cell {
+    @apply col-span-12 sm:col-span-4 font-mono text-xs;
+    color: rgba(255,228,120,0.92);
+  }
+
+  .departures-cell--track {
+    @apply col-span-12 sm:col-span-6;
+    color: rgba(255,255,255,0.88);
+  }
+
+  .departures-cell--status {
+    @apply col-span-12 sm:col-span-2 text-right;
+    color: rgba(160,255,190,0.92);
+  }
+
+  @keyframes dutyfreeShimmer {
+    0% { transform: translateX(-35%); opacity: 0.35; }
+    50% { transform: translateX(35%); opacity: 0.7; }
+    100% { transform: translateX(115%); opacity: 0.35; }
+  }
+
+  /* Grain overlay */
+  .grain::after {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    mix-blend-mode: multiply;
+  }
+}
+
+/* Print Styles */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+}
