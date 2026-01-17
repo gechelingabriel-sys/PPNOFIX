@@ -263,8 +263,8 @@ export function Stage11Arrival({ playSFX, vibrate }: Stage11Props) {
 
           <p className="text-sm text-muted-foreground leading-relaxed">
             Ya aterrizamos. Estás en la etapa de reclamo de equipaje: toca esperar a que tu valija aparezca en la cinta (con paciencia de santo).
-             Cuando la tengas, desbloquea la maleta con el código y se abren los regalos.                                   
-
+             Cuando la tengas, desbloquea la maleta con el código y se abren los regalos. 
+            </p>  
           <div className="mt-4 flex items-center justify-between rounded-xl bg-muted/40 border border-border px-4 py-3">
             <div className="text-xs font-mono tracking-widest">CINTA 23</div>
             <div className="text-xs text-muted-foreground">
